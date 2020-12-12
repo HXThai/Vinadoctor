@@ -19,6 +19,7 @@ import RegisterScreen from '../Screen/RegisterScreen';
 import ProductScreen from '../Screen/ProductScreen';
 import ProductDetailScreen from '../Screen/ProductDetailScreen';
 import CartScreen from '../Screen/CartScreen';
+import OrderScreen from '../Screen/OrderScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -32,6 +33,9 @@ const getTabBarVisibility = (route) => {
     return false;
   }
   if (routename == 'CartScreen') {
+    return false;
+  }
+  if (routename == 'OrderScreen') {
     return false;
   }
   return true;
@@ -270,23 +274,26 @@ function HomeStack(props) {
           },
           headerLeft: null,
           headerRight: () => (
-            <View
-              style={{
-                width: 40,
-                height: 40,
-                backgroundColor: 'white',
-                marginRight: 15,
-                borderRadius: 10,
-                justifyContent: 'center',
-              }}>
-              <View style={{width: 40, height: 27, alignItems: 'center'}}>
-                <Image
-                  source={Images.cart}
-                  // resizeMode="contain"
-                  style={{width: 23, height: 23}}
-                />
+            <TouchableOpacity
+              onPress={() => props.navigation.navigate('CartScreen')}>
+              <View
+                style={{
+                  width: 40,
+                  height: 40,
+                  backgroundColor: 'white',
+                  marginRight: 15,
+                  borderRadius: 10,
+                  justifyContent: 'center',
+                }}>
+                <View style={{width: 40, height: 27, alignItems: 'center'}}>
+                  <Image
+                    source={Images.cart}
+                    // resizeMode="contain"
+                    style={{width: 23, height: 23}}
+                  />
+                </View>
               </View>
-            </View>
+            </TouchableOpacity>
           ),
         }}
       />
@@ -394,6 +401,48 @@ function HomeStack(props) {
             <TouchableOpacity
               onPress={() => {
                 props.navigation.navigate('ProductScreen');
+              }}>
+              <View style={{marginLeft: 15}}>
+                <MaterialIcons
+                  name={'keyboard-backspace'}
+                  size={30}
+                  color="#FFFFFF"
+                />
+              </View>
+            </TouchableOpacity>
+          ),
+          headerRight: () => (
+            <View
+              style={{
+                width: 22,
+                height: 27,
+                alignItems: 'center',
+                marginRight: 15,
+              }}>
+              {/* <Image
+                source={Images.cartHeader}
+                // resizeMode="contain"
+                style={{width: 22, height: 27}}
+              /> */}
+            </View>
+          ),
+          tabBarVisible: false,
+        }}
+      />
+      <Stack.Screen
+        name="OrderScreen"
+        component={OrderScreen}
+        options={{
+          headerTitle: 'Đặt mua',
+          headerTitleStyle: {alignSelf: 'center', color: '#fff'},
+          headerStyle: {
+            backgroundColor: Color.main,
+            elevation: 0,
+          },
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => {
+                props.navigation.navigate('CartScreen');
               }}>
               <View style={{marginLeft: 15}}>
                 <MaterialIcons

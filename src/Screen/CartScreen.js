@@ -14,6 +14,7 @@ import Color from '../Theme/Color';
 const CartScreen = (props) => {
   const [dataProduct, setDataProduct] = useState([
     {
+      id: 0,
       image: Images.imageProductInCart,
       title: 'Vitamin C',
       price: 29000,
@@ -21,6 +22,7 @@ const CartScreen = (props) => {
       isCheck: false,
     },
     {
+      id: 1,
       image: Images.imageProductInCart,
       title: 'Vitamin C',
       price: 29000,
@@ -28,6 +30,7 @@ const CartScreen = (props) => {
       isCheck: true,
     },
     {
+      id: 2,
       image: Images.imageProductInCart,
       title: 'Vitamin C',
       price: 29000,
@@ -35,6 +38,7 @@ const CartScreen = (props) => {
       isCheck: true,
     },
     {
+      id: 3,
       image: Images.imageProductInCart,
       title: 'Vitamin C',
       price: 29000,
@@ -42,6 +46,7 @@ const CartScreen = (props) => {
       isCheck: false,
     },
     {
+      id: 4,
       image: Images.imageProductInCart,
       title: 'Vitamin C',
       price: 29000,
@@ -49,6 +54,7 @@ const CartScreen = (props) => {
       isCheck: false,
     },
     {
+      id: 5,
       image: Images.imageProductInCart,
       title: 'Vitamin C',
       price: 29000,
@@ -56,6 +62,7 @@ const CartScreen = (props) => {
       isCheck: false,
     },
     {
+      id: 6,
       image: Images.imageProductInCart,
       title: 'Vitamin C',
       price: 29000,
@@ -63,6 +70,7 @@ const CartScreen = (props) => {
       isCheck: false,
     },
     {
+      id: 7,
       image: Images.imageProductInCart,
       title: 'Vitamin C',
       price: 29000,
@@ -72,12 +80,14 @@ const CartScreen = (props) => {
   ]);
 
   const handleSelectProduct = (value) => {
+    // console.log(value);
     const newData = update(dataProduct, {
       [value]: {
         $toggle: ['isCheck'],
       },
     });
-    setDataProduct([newData]);
+    // console.log(newData);
+    setDataProduct(newData);
   };
 
   //   useEffect(() => {
@@ -152,6 +162,7 @@ const CartScreen = (props) => {
                                 color: Color.priceDiscount,
                               }}>
                               {item.price}
+                              {'đ'}
                             </Text>
                             <View
                               style={{
@@ -214,7 +225,7 @@ const CartScreen = (props) => {
                           <MaterialIcons
                             name={'delete-outline'}
                             size={28}
-                            color={Color.price}
+                            color={'grey'}
                           />
                         </View>
                       </View>
@@ -225,57 +236,56 @@ const CartScreen = (props) => {
             </View>
           </View>
         </ScrollView>
-        <TouchableOpacity>
+        <View
+          style={{
+            height: 50,
+            width: '100%',
+            alignItems: 'center',
+            justifyContent: 'center',
+            flexDirection: 'row',
+          }}>
           <View
             style={{
-              height: 50,
-              width: '100%',
-              alignItems: 'center',
-              justifyContent: 'center',
-              flexDirection: 'row',
+              width: '50%',
+              height: '100%',
+              flexDirection: 'column',
+              justifyContent: 'space-evenly',
             }}>
             <View
               style={{
-                width: '50%',
-                height: '100%',
-                flexDirection: 'column',
-                justifyContent: 'space-evenly',
+                width: '100%',
+                justifyContent: 'space-between',
+                flexDirection: 'row',
+                paddingLeft: 8,
+                paddingRight: 8,
               }}>
-              <View
-                style={{
-                  width: '100%',
-                  justifyContent: 'space-between',
-                  flexDirection: 'row',
-                  paddingLeft: 8,
-                  paddingRight: 8,
-                }}>
-                <Text>Số lượng hàng</Text>
-                <Text>3</Text>
-              </View>
-              <View
-                style={{
-                  width: '100%',
-                  justifyContent: 'space-between',
-                  flexDirection: 'row',
-                  paddingLeft: 8,
-                  paddingRight: 8,
-                }}>
-                <Text>Thành tiền</Text>
-                <Text style={{color: Color.priceDiscount}}>3.000.000đ</Text>
-              </View>
+              <Text>Số lượng hàng</Text>
+              <Text>3</Text>
             </View>
             <View
               style={{
-                width: '50%',
-                height: '100%',
-                backgroundColor: Color.main,
-                alignItems: 'center',
-                justifyContent: 'center',
+                width: '100%',
+                justifyContent: 'space-between',
+                flexDirection: 'row',
+                paddingLeft: 8,
+                paddingRight: 8,
               }}>
-              <Text style={{fontSize: 16, color: 'white'}}>Đặt mua</Text>
+              <Text>Thành tiền</Text>
+              <Text style={{color: Color.priceDiscount}}>3.000.000đ</Text>
             </View>
           </View>
-        </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => props.navigation.navigate('OrderScreen')}
+            style={{
+              width: '50%',
+              height: '100%',
+              backgroundColor: Color.main,
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+            <Text style={{fontSize: 16, color: 'white'}}>Đặt mua</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
